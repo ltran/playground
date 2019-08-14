@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: postgres:alpine
+    ports:
+      - $POSTGRES_PORT:$POSTGRES_PORT
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_PORT: $POSTGRES_PORT
+  app:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/app
+    ports:
+      - $PORT:$PORT
+    environment:
+      DATABASE_URL: postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB?pool=$POSTGRES_POOL
+    env_file: .env
+    depends_on:
+      - db
