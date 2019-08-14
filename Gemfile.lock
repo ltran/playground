@@ -55,6 +55,10 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    jsonapi-resources (0.9.10)
+      activerecord (>= 4.1)
+      concurrent-ruby
+      railties (>= 4.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -83,6 +87,7 @@ GEM
       pry (>= 0.10.4)
     puma (3.12.1)
     rack (2.0.7)
+    rack-cors (1.0.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.3)
@@ -134,10 +139,12 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
+  jsonapi-resources
   listen
   pg
   pry-rails
   puma
+  rack-cors
   rails (~> 5.2.3)
 
 BUNDLED WITH
